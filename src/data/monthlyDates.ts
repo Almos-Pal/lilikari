@@ -1,7 +1,7 @@
 import { MonthlyDate } from "@/types/monthlyDate";
 
 // Helper function to create date for the first day of each month in 2025
-const dateForMonth = (month: number, year: number = 2025): Date => {
+const dateForMonth = (month: number, year: number = 2026): Date => {
   return new Date(year, month - 1, 1);
 };
 
