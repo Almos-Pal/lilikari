@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lili éves randijai 💕
 
-## Getting Started
+Egy privát, romantikus webalkalmazás, amely egy teljes évet mutat be havi randikon keresztül.
 
-First, run the development server:
+## Funkciók
+
+- 🔒 **Jelszó védelem** - Privát hozzáférés jelszóval
+- 📸 **Képfeltöltés** - Vercel Blob Storage használatával
+- 📅 **Hónap szerinti lockolás** - Csak a cím látszik, amíg nem jön el az idő
+- 📱 **QR-kód generálás** - Minden hónaphoz külön QR-kód
+- 🎨 **Szép, modern UI** - Letisztult, érzelmes design
+
+## Telepítés
+
+```bash
+npm install
+```
+
+## Environment változók
+
+Hozd létre a `.env.local` fájlt:
+
+```env
+# Jelszó védelem
+SITE_PASSWORD=lili2026
+
+# Vagy bcrypt hash (production-hoz)
+# PASSWORD_HASH=$2a$10$your_hash_here
+
+# Vercel Blob Storage token
+BLOB_READ_WRITE_TOKEN=your_token_here
+```
+
+### Vercel Blob Storage token létrehozása
+
+1. Menj a [Vercel Dashboard](https://vercel.com/dashboard)-ra
+2. Válaszd ki a projektet
+3. Settings → Environment Variables
+4. Kattints a "Blob" fülre
+5. Hozz létre egy új tokent és add hozzá `BLOB_READ_WRITE_TOKEN` néven
+
+## Fejlesztés
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Nyisd meg [http://localhost:3000](http://localhost:3000) a böngészőben.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy Vercel-en
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Pushold a kódot GitHub-ra
+2. Kapcsold össze a Vercel-lel
+3. Add hozzá az environment változókat a Vercel dashboard-ban
+4. Deploy! 🚀
 
-## Learn More
+## Használat
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Alapértelmezett jelszó: `lili2026` (változtasd meg az `.env.local` fájlban!)
+- Minden hónapnak van saját URL-je: `/month/1`, `/month/2`, stb.
+- QR-kódok megtekintése: `/qr-codes`
