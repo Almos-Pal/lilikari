@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { MonthlyDate } from '@/types/monthlyDate';
-import { getMonthStatus } from '@/utils/monthUtils';
-import MissionUpload from './MissionUpload';
-import { monthNames } from '@/data/monthlyDates';
+import { MonthlyDate } from "@/types/monthlyDate";
+import { getMonthStatus } from "@/utils/monthUtils";
+import MissionUpload from "./MissionUpload";
+import { monthNames } from "@/data/monthlyDates";
 
 type MonthDetailsProps = {
   monthData: MonthlyDate | null;
@@ -17,7 +17,7 @@ export default function MonthDetails({ monthData }: MonthDetailsProps) {
   const status = getMonthStatus(monthData);
 
   // Ha locked, csak a címet mutasd
-  if (status === 'locked') {
+  if (status === "locked") {
     return (
       <div className="mt-12">
         <div className="rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-8 dark:from-gray-800 dark:to-gray-900">
@@ -80,4 +80,3 @@ export default function MonthDetails({ monthData }: MonthDetailsProps) {
     </div>
   );
 }
-

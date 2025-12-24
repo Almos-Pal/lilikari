@@ -72,8 +72,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 4,
     title: "Nemzeti Botanikus Kert",
-    subtitle: "Vácrátót",
-    description: "Vácrátót",
+    subtitle: "zöld influenszerek gyűjtőhelye",
+    description: "zöld influenszerek gyűjtőhelye",
     availableFrom: dateForMonth(4),
     missions: [
       {
@@ -93,8 +93,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 5,
     title: "Elszökős nap",
-    subtitle: "itt vagyunk!",
-    description: "itt vagyunk!",
+    subtitle: "Egy nap, amikor eltűnünk a világból.",
+    description: "Egy nap, amikor eltűnünk a világból.",
     availableFrom: dateForMonth(5),
     missions: [
       {
@@ -114,8 +114,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 6,
     title: "Első vonat randi",
-    subtitle: "milyen szép a táj",
-    description: "milyen szép a táj",
+    subtitle: "Nem tudjuk hova megyünk – és pont ez benne a jó.",
+    description: "Nem tudjuk hova megyünk – és pont ez benne a jó.",
     availableFrom: dateForMonth(6),
     missions: [
       {
@@ -135,8 +135,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 7,
     title: "Strand",
-    subtitle: "ham-nyam pancsoltam",
-    description: "ham-nyam pancsoltam",
+    subtitle: "Nyár, víz, semmi más.",
+    description: "Nyár, víz, semmi más.",
     availableFrom: dateForMonth(7),
     missions: [
       {
@@ -156,8 +156,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 8,
     title: "Szabadtéri mozi",
-    subtitle: "popcorn makik",
-    description: "popcorn makik",
+    subtitle: "egy nyári jelenet.",
+    description: "egy nyári jelenet.",
     availableFrom: dateForMonth(8),
     missions: [
       {
@@ -177,8 +177,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 9,
     title: "Egy hátizsáknyi randi",
-    subtitle: "mindennek a tetején",
-    description: "mindennek a tetején",
+    subtitle: "Ennyi elég mindenhez.",
+    description: "Ennyi elég mindenhez.",
     availableFrom: dateForMonth(9),
     missions: [
       {
@@ -198,8 +198,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 10,
     title: "Titkos küldetés randi",
-    subtitle: "???",
-    description: "???",
+    subtitle: "Titokként indul és emlékként ér véget.",
+    description: "Titokként indul és emlékként ér véget.",
     availableFrom: dateForMonth(10),
     missions: [
       {
@@ -219,8 +219,8 @@ export const monthlyDates: MonthlyDate[] = [
   {
     month: 11,
     title: "Tematikus főzőest",
-    subtitle: "kész étel",
-    description: "kész étel",
+    subtitle: "Egy este, amikor mi vagyunk az étterem.",
+    description: "Egy este, amikor mi vagyunk az étterem.",
     availableFrom: dateForMonth(11),
     missions: [
       {
