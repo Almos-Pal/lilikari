@@ -27,17 +27,25 @@ SITE_PASSWORD=lili2026
 # Vagy bcrypt hash (production-hoz)
 # PASSWORD_HASH=$2a$10$your_hash_here
 
-# Vercel Blob Storage token
+# Vercel Blob Storage token (csak local development-hoz szükséges)
+# Production-ban a Vercel automatikusan kezeli
 BLOB_READ_WRITE_TOKEN=your_token_here
 ```
 
-### Vercel Blob Storage token létrehozása
+### Vercel Blob Storage beállítása
+
+**Production környezetben (Vercel-en):**
 
 1. Menj a [Vercel Dashboard](https://vercel.com/dashboard)-ra
 2. Válaszd ki a projektet
-3. Settings → Environment Variables
-4. Kattints a "Blob" fülre
-5. Hozz létre egy új tokent és add hozzá `BLOB_READ_WRITE_TOKEN` néven
+3. Menj a **Storage** fülre
+4. Kattints a **Create Database** vagy **Add Integration** gombra
+5. Válaszd ki a **Blob** opciót
+6. A Vercel automatikusan beállítja a szükséges környezeti változókat
+
+**Local development-hoz:**
+
+Ha local development-ban szeretnél dolgozni, add hozzá a `BLOB_READ_WRITE_TOKEN`-t az `.env.local` fájlhoz. A token-t a Vercel Blob Store beállításaiban találod.
 
 ## Fejlesztés
 

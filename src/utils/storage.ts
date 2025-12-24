@@ -1,13 +1,13 @@
 // Storage utilities for saving uploaded images (Vercel Blob Storage + localStorage cache)
 
-const STORAGE_KEY = 'lilikari_uploads';
+const STORAGE_KEY = "lilikari_uploads";
 
 export type UploadedImages = Record<string, Record<number, string>>; // month -> missionId -> imageUrl
 
 // Load image URLs from localStorage cache
 export const loadUploadedImages = (): UploadedImages => {
-  if (typeof window === 'undefined') return {};
-  
+  if (typeof window === "undefined") return {};
+
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored ? JSON.parse(stored) : {};
@@ -22,25 +22,33 @@ export const saveUploadedImage = async (
   missionId: number,
   file: File
 ): Promise<string> => {
-  if (typeof window === 'undefined') throw new Error('Cannot save on server');
-  
+  if (typeof window === "undefined") throw new Error("Cannot save on server");
+
   try {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('month', month.toString());
-    formData.append('missionId', missionId.toString());
+    formData.append("file", file);
+    formData.append("month", month.toString());
+    formData.append("missionId", missionId.toString());
 
-    const response = await fetch('/api/upload', {
-      method: 'POST',
+    const response = await fetch("/api/upload", {
+      method: "POST",
       body: formData,
     });
 
     if (!response.ok) {
-      throw new Error('Upload failed');
+      const errorData = await response
+        .json()
+        .catch(() => ({ error: "Unknown error" }));
+      const errorMessage =
+        errorData.details ||
+        errorData.error ||
+        `Upload failed with status ${response.status}`;
+      console.error("Upload API error:", errorMessage);
+      throw new Error(errorMessage);
     }
 
     const { url } = await response.json();
-    
+
     // Cache the URL in localStorage
     const images = loadUploadedImages();
     if (!images[month]) {
@@ -48,10 +56,10 @@ export const saveUploadedImage = async (
     }
     images[month][missionId] = url;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
-    
+
     return url;
   } catch (error) {
-    console.error('Failed to save image:', error);
+    console.error("Failed to save image:", error);
     throw error;
   }
 };
@@ -62,13 +70,13 @@ export const deleteUploadedImage = async (
   missionId: number,
   imageUrl: string
 ): Promise<void> => {
-  if (typeof window === 'undefined') return;
-  
+  if (typeof window === "undefined") return;
+
   try {
     // Delete from Vercel Blob Storage
-    await fetch('/api/delete', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("/api/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url: imageUrl }),
     });
 
@@ -79,7 +87,7 @@ export const deleteUploadedImage = async (
       localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
     }
   } catch (error) {
-    console.error('Failed to delete image:', error);
+    console.error("Failed to delete image:", error);
   }
 };
 
@@ -91,4 +99,3 @@ export const getImageForMission = (
   const images = loadUploadedImages();
   return images[month]?.[missionId];
 };
-

@@ -22,16 +22,25 @@ export async function POST(request: NextRequest) {
     }
 
     // Feltöltés Vercel Blob Storage-ba
-    const blob = await put(`month-${month}-mission-${missionId}-${Date.now()}.jpg`, file, {
+    // A Vercel production-ban automatikusan kezeli a token-t, de ha nincs, akkor használjuk a BLOB_READ_WRITE_TOKEN-t
+    const uploadOptions: { access: 'public'; token?: string } = {
       access: 'public',
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-    });
+    };
+
+    // Ha van BLOB_READ_WRITE_TOKEN env változó, használjuk (pl. local development vagy manuális beállítás)
+    if (process.env.BLOB_READ_WRITE_TOKEN) {
+      uploadOptions.token = process.env.BLOB_READ_WRITE_TOKEN;
+    }
+
+    const blob = await put(`month-${month}-mission-${missionId}-${Date.now()}.jpg`, file, uploadOptions);
 
     return NextResponse.json({ url: blob.url });
   } catch (error) {
     console.error('Upload error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Upload error details:', errorMessage);
     return NextResponse.json(
-      { error: 'Failed to upload image' },
+      { error: 'Failed to upload image', details: errorMessage },
       { status: 500 }
     );
   }

@@ -18,15 +18,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No URL provided' }, { status: 400 });
     }
 
-    await del(url, {
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-    });
+    // A Vercel production-ban automatikusan kezeli a token-t
+    const deleteOptions: { token?: string } = {};
+    
+    // Ha van BLOB_READ_WRITE_TOKEN env változó, használjuk
+    if (process.env.BLOB_READ_WRITE_TOKEN) {
+      deleteOptions.token = process.env.BLOB_READ_WRITE_TOKEN;
+    }
+
+    await del(url, deleteOptions);
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Delete error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Delete error details:', errorMessage);
     return NextResponse.json(
-      { error: 'Failed to delete image' },
+      { error: 'Failed to delete image', details: errorMessage },
       { status: 500 }
     );
   }
